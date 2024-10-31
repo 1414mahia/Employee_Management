@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    h1 {
+        display: flex;
+        justify-content: center;
+        color: black;
+        position: relative;
+        z-index: 2;
+        margin-top: 20px;
+        transition: color 0.3s, transform 0.3s;
+    }
+    h1:hover {
+        color: #007bff;
+        transform: scale(1.1);
+    }
+</style>
+
+<h1>VIEW ATTENDANCE</h1>
+
+{% if data %}
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+           
+            <th scope="col">Employee ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">First Half Attendance</th>  <!-- Corrected typo here -->
+            <th scope="col">Second Half Attendance</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emp in data %}
+        <tr>
+         
+            <td>{{ emp.employee_id }}</td>
+            <td>{{ emp.day }}</td>
+            <td>{{ emp.first_half_attendance}}</td>  <!-- Corrected typo here -->
+            <td>{{ emp.second_half_attendance}}</td>
+        
+            <td>
+                <div style="display:flex; justify-content:space-around;">
+                    <form method="POST" action="{% url 'add_attendance'  %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger" value="Back">
+                    </form>
+                </div>
+                
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No data available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h3>No Data Available</h3>
+{% endif %}
+{% endblock content %}

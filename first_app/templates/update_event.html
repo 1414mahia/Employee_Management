@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .form-overlay {
+        position: relative;
+        z-index: 2;
+        width: 40%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        margin-top: 10px;
+        background-color: rgba(248, 249, 250, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        display: flex;
+        justify-content: center;
+        color: black;
+        margin-top: 20px;
+    }
+    h1:hover {
+        color: #007bff;
+        transform: scale(1.1);
+    }
+</style>
+
+<h1>Update Event</h1>
+
+<div class="form-overlay">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <input type="text" class='form-control mb-2' placeholder="Event Name" name="event_name" required value="{{ event.event_name }}">
+        <input type="text" class='form-control mb-2' placeholder="Event ID" name="event_id" required value="{{ event.event_id }}" readonly>
+        <input type="text" class='form-control mb-2' placeholder="Description" name="description" required value="{{ event.description }}">
+        <input type="datetime-local" class='form-control mb-2' placeholder="Start Date" name="start_date" required value="{{ event.start_date|date:'Y-m-d H:i' }}">
+        <input type="datetime-local" class='form-control mb-2' placeholder="End Date" name="end_date" required value="{{ event.end_date|date:'Y-m-d H:i' }}">
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'view_event' %}" class="btn btn-danger">View Event</a>
+    </form>
+</div>
+
+{% endblock content %}

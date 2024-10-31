@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container" style="display: flex; align-items: center; justify-content: center; background-color: skyblue; height: 100vh;">
+    <div class="login_form" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color:lightgray; border-radius: 10px; cursor: pointer; padding: 20px; height: 400px; width: 400px;">
+        <div class='title' style="font-size: 18px; margin-bottom: 20px; text-align: center;">
+            <h2>Welcome, Let's Login</h2>
+        </div>
+        <img src="{% static 'images/second.jpg' %}" alt="Logo" style="width: 30%; height: auto; border-radius: 10px; margin-bottom: 20px;">
+
+        {% if form.non_field_errors %}
+            <div style="color: red; margin-bottom: 15px;">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'login_page' %}">
+            {% csrf_token %}
+            <div class="row" style="margin-bottom: 15px; position: relative;">
+                <i class='fas fa-user' style="position: absolute; left: 160px; top: 10px;"></i>
+                {{ form.username }}  <!-- Render the username field -->
+            </div>
+            <div class="row" style="margin-bottom: 15px; position: relative;">
+                <i class='fas fa-lock' style="position: absolute; left: 160px; top: 10px;"></i>
+                {{ form.password }}  <!-- Render the password field -->
+            </div>
+            <div class="row button">
+                <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

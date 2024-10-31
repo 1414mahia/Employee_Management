@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    body{
+        background-color:lightgray;
+    }
+    h1 {
+        display: flex;
+        justify-content: center;
+        font-size: 36px; /* Increased font size */
+        color: black;
+        position: relative;
+        z-index: 2;
+        margin-top: 30px; /* Increased margin */
+    }
+
+    h1:hover {
+        color: #007bff;
+        transform: scale(1.1);
+    }
+
+    
+</style>
+
+<form method="post" style="width: 45%; margin: auto;">
+    <h1 >Add Leave</h1>
+    {% csrf_token %}
+    {{ form |crispy  }}  <!-- Renders the form fields -->
+    <button type="submit" class="btn btn-danger">Submit</button>
+</form>
+
+{% endblock %}

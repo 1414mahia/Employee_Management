@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Background image container */
+    .background-image { 
+        position: relative;
+        width: 100%;
+        height: 90vh;
+        overflow: hidden;
+    }
+
+    /* Background image styling */
+    .background-image img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+    }
+
+    /* Welcome text styling */
+    .welcome-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+        cursor: pointer;
+        z-index: 2;
+        transition: color 0.3s ease;
+    }
+
+    /* Hover effect on welcome text */
+    .welcome-text:hover {
+        color: blue;
+    }
+</style>
+
+<div class="background-image">
+    <img src="{% static 'images/details.jpg' %}" alt="Home Image">
+    <div class="welcome-text">
+        WELCOME
+    </div>
+</div>
+{% endblock %}

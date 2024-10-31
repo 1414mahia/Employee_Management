@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<style>
+    .form-overlay {
+        position: relative;
+        z-index: 2;
+        width: 40%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        margin-top: 10px;
+        background-color: rgba(248, 249, 250, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        display: flex;
+        justify-content: center;
+        color: black;
+        margin-top: 20px;
+    }
+    h1:hover {
+        color: #007bff;
+        transform: scale(1.1);
+    }
+</style>
+
+<h1>Update Employee</h1>
+
+<div class="form-overlay">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <input type="text" class='form-control mb-2' placeholder="Name" name="name" required value="{{ employees.name }}">
+        <input type="text" class='form-control mb-2' placeholder="Employee ID" name="employee_id" required value="{{ employees.employee_id }}" readonly>
+        <input type="email" class='form-control mb-2' placeholder="Email" name="email" required value="{{ employees.email }}">
+        <input type="text" class='form-control mb-2' placeholder="Father's Name" name="father_name" required value="{{ employees.father_name }}">
+        <input type="date" class='form-control mb-2' placeholder="Date of Birth" name="date_of_birth" required value="{{ employees.date_of_birth|date:'Y-m-d' }}">
+        <input type="number" class='form-control mb-2' placeholder="Salary" name="salary" required value="{{ employees.salary }}">
+        <input type="text" class='form-control mb-2' placeholder="Designation" name="designation" required value="{{ employees.designation }}">
+        <input type="text" class='form-control mb-2' placeholder="Higher Education" name="higher_education" required value="{{ employees.higher_education }}">
+        <input type="date" class='form-control mb-2' placeholder="Joining Date" name="joining_date" required value="{{ employees.joining_date|date:'Y-m-d' }}">
+        <input type="text" class='form-control mb-2' placeholder="Nationality" name="nationality" required value="{{ employees.nationality }}">
+
+        <!-- Marital Status Selection -->
+        <div class="form-group mb-2">
+            <label for="marital_status">Marital Status:</label>
+            <select name="marital_status" class='form-control' required>
+                <option value="Married" {% if employees.marital_status == "M" %}selected{% endif %}>Married</option>
+                <option value="Unmarried" {% if employees.marital_status == "U" %}selected{% endif %}>Unmarried</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'view_employee' %}" class="btn btn-danger">View Employee</a>
+    </form>
+</div>
+
+{% endblock content %}

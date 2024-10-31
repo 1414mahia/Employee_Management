@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+               
+
+<style>
+    h1 {
+        display: flex;
+        justify-content: center;
+        color: black;
+        position: relative;
+        z-index: 2;
+        margin-top: 20px;
+        transition: color 0.3s, transform 0.3s;
+    }
+    h1:hover {
+        color: #007bff;
+        transform: scale(1.1);
+    }
+</style>
+
+<h1>VIEW AND DELETE EMPLOYEE</h1>
+
+{% if data %}
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Employee ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">Father's Name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Higher Education</th>
+            <th scope="col">Joining Date</th>
+            <th scope="col">Marital Status</th>
+            <th scope="col">Nationality</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emp in data %}
+        <tr>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.employee_id }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.father_name }}</td>
+            <td>{{ emp.date_of_birth }}</td>
+            <td>{{ emp.salary }}</td>
+            <td>{{ emp.designation }}</td>
+            <td>{{ emp.higher_education }}</td>
+            <td>{{ emp.joining_date }}</td>
+            <td>{{ emp.marital_status }}</td>
+            <td>{{ emp.nationality }}</td>
+            <td>
+                <div style="display:flex;justify-content:space-between;">
+                    <a class="btn btn-primary me-2" href="{% url 'update_employee' emp.employee_id %}">Update</a>
+                    <form method="POST" action="{% url 'delete_employee' emp.employee_id %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
+                </div>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h3>No Data Available</h3>
+{% endif %}
+{% endblock content %}

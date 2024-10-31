@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* For background image and text */
+    .background-image { 
+        position: relative; /* Change to relative for proper positioning of child elements */
+        width: 100%;
+        height: 90vh; /* Use viewport height for full-screen effect */
+        overflow: hidden; /* Prevent overflow */
+    }
+
+    /* For background image */
+    .background-image img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%; /* Ensure the image covers the entire width */
+        height: 100%; /* Ensure the image covers the entire height */
+        object-fit: cover; /* Maintain aspect ratio and cover the area */
+        transform: translate(-50%, -50%); /* Center the image */
+        z-index: -1; /* Send the image behind other content */
+    }
+
+    .welcome-text {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+        cursor: pointer;
+        z-index: 2; /* Bring the text above the image */
+        
+    
+    }
+
+    .welcome-text:hover {
+        color: blue; /* Added semicolon here */
+       
+    }
+</style>
+
+<div class="background-image">
+    <img src="{% static 'images/home.jpg' %}" alt="Home Image">
+    <div class="welcome-text">
+        Employee Management System
+    </div>
+</div>
+{% endblock %}

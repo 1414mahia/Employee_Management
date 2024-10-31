@@ -1,0 +1,20 @@
+body {
+  
+    background-size: cover; /* This makes the image cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat;
+    width: 100%;
+    margin:0;
+}
+
+
+
+.login_form{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:lightgray;
+    border-radius: 10px;
+    cursor: pointer;
+}
