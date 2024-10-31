@@ -11,7 +11,7 @@ from django.contrib.auth import logout
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')
 
 # Handle login
 def login(request):
